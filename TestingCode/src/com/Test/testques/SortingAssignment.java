@@ -13,8 +13,10 @@ public class SortingAssignment {
 		//Case 1
 //		Set<Object> hash = new TreeSet<Object>(new SortByIntUserIDString());
 		//Case 2
-		Set<Object> hash = new TreeSet<Object>(new SortByStringUserIDInt());
+//		Set<Object> hash = new TreeSet<Object>(new SortByStringUserIDInt());
 		//Case 3
+		Set<Object> hash = new TreeSet<Object>(new SortByGlobalString());
+		
 		hash.add(u1);
 		hash.add(u2);
 		hash.add(u3);
@@ -111,6 +113,64 @@ class SortByStringUserIDInt implements Comparator<Object>{
 	
 }
 
+class SortByGlobalString implements Comparator<Object>{
+
+	@Override
+	public int compare(Object o1, Object o2) {
+		// TODO Auto-generated method stub
+		if(o1 instanceof Integer) {
+			if(o2 instanceof Integer)
+				return (int)o1-(int)o2;
+			else
+				return 1;
+		}
+//---------------------------------------------------------------
+//		else if(o2 instanceof Integer) {
+//			if(o1 instanceof Integer)
+//				return (int)o1-(int)o2;
+//		}
+//---------------------------------------------------------------
+		else if(o1 instanceof String){
+			if(o2 instanceof String)
+				return ((String)o1).compareTo((String)o2);
+			else if(o2 instanceof User)
+				return new SortByString().compare(o1, o2);
+			else
+				return -1;
+		}
+//---------------------------------------------------------------
+//		else if(o2 instanceof String){
+//			if(o1 instanceof String)
+//				return ((String)o1).compareTo((String)o2);
+//			else if(o1 instanceof User)
+//				return new SortByString().compare(o2, o1);
+//			else
+//				return -1;
+//		}
+//---------------------------------------------------------------
+		else if(o1 instanceof User) {
+			if(o2 instanceof User)
+				return new SortByUserName().compare((User)o1, (User)o2);
+			else if(o2 instanceof String)
+				return new SortByString().compare(o1, o2);
+			else
+				return -1;
+		}
+//---------------------------------------------------------------
+//		else if(o2 instanceof User) {
+//			if(o1 instanceof User)
+//				return new SortByUserName().compare((User)o1, (User)o2);
+//			else if(o1 instanceof String)
+//				return new SortByString().compare(o2, o1);
+//			else
+//				return -1;
+//		}
+//---------------------------------------------------------------
+		return 0;
+	}
+	
+}
+
 class SortByUserID implements Comparator<User>{
 
 	@Override
@@ -121,18 +181,21 @@ class SortByUserID implements Comparator<User>{
 	
 }
 
+
 class SortByString implements Comparator<Object>{
-	@Override
-	public int compare(Object o1, Object o2) {
-		// TODO Auto-generated method stub
-		if(o1 instanceof String && o2 instanceof String)
-			return o1.toString().compareTo(o2.toString());
-		else if(o1 instanceof User && o2 instanceof User)
-			return new SortByUserName().compare((User)o1,(User)o2);
-		else if(o1 instanceof User && o2 instanceof String) {
-		}	
-		return 0;
-	}	
+    @Override
+    public int compare(Object o1, Object o2) {
+        // TODO Auto-generated method stub
+        if(o1 instanceof User) {
+        	if(o2 instanceof String)
+        		return ((User) o1).getName().compareTo((String) o2);
+        }
+        else if(o1 instanceof String) {
+        	if(o2 instanceof User)
+        		return ((String) o1).compareTo(((User) o2).getName());
+        }
+        return 0;
+    }
 }
 
 class SortByUserName implements Comparator<User>{
