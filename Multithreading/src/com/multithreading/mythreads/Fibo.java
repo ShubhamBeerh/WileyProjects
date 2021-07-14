@@ -77,7 +77,8 @@ class Series{
 			list.add(list.get(last-2)+list.get(last-1));
 			System.out.println(Thread.currentThread().getName()+list);
 			this.wait();
-			System.out.println("T1 Resumed");
+			Thread.sleep(1000);
+//			System.out.println("T1 Resumed");
 			this.notify();
 		}
 		
@@ -93,8 +94,8 @@ class Series{
 				notify();
 				System.out.println(Thread.currentThread().getName()+list);
 				this.wait();
-				System.out.println("T2 Resumed");
-//				Thread.sleep(500);
+				Thread.sleep(1000);
+//				System.out.println("T2 Resumed");
 			
 			}
 		}
