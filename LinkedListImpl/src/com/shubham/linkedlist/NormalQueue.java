@@ -9,7 +9,7 @@ public class NormalQueue {
 	private static int rear=0,front=0;
 	private int num;
 	public static void main(String[] args) throws OverFlow, UnderFlow {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stubs
 		NormalQueue q = new NormalQueue();
 		q.enqueue(1);
 		q.enqueue(2);
