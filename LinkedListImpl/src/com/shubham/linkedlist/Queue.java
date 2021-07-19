@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class Queue {
 	final int MAX_SIZE = 10;
 	private int[] arr = new int[MAX_SIZE];
-	private static int count=0,current=0;
+	private static int count=0;
 	private int num;
 	public static void main(String[] args) throws OverFlow, UnderFlow {
 		// TODO Auto-generated method stub
@@ -42,7 +42,7 @@ public class Queue {
 			for(int i=count;i>0;i--) {
 				arr[i]=arr[i-1];
 			}
-			arr[current]=data;
+			arr[0]=data;
 			count++;
 		}
 	}
