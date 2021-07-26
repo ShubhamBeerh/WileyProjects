@@ -14,10 +14,11 @@ class Node{
 
 public class Tree {
 	static Scanner sc = null;
+	static Node root;
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		sc=new Scanner(System.in);
-		Node root=createTree();
+		root=createTree();
 		preOrder(root);
 		System.out.println();
 		inOrder(root);
@@ -25,6 +26,11 @@ public class Tree {
 		postOrder(root);
 		System.out.println();
 		levelOrder(root);
+		System.out.println();
+		searchNode(10);
+		searchNode(4);
+		searchNode(3);
+		searchNode(9);
 	}
 	
 	static Node createTree() {
@@ -74,5 +80,24 @@ public class Tree {
 			if(current.left!=null) queue.add(current.left);
 			if(current.right!=null) queue.add(current.right);
 		}
+	}
+	
+	static void searchNode(int value) {
+		if(root==null) {
+			System.out.println("Empty Tree");
+			return;
+		}
+		Queue<Node> queue = new LinkedList<Node>();
+		queue.add(root);
+		while(!queue.isEmpty()) {
+			Node current = queue.remove();
+			if(current.data==value) {
+				System.out.println(value+" found in Tree!!");
+				return;
+			}
+			if(current.left!=null) queue.add(current.left);
+			if(current.right!=null) queue.add(current.right);
+		}
+		System.out.println(value+" not present in Tree!!");
 	}
 }
