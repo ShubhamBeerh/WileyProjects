@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
 
+
 class Node{
 	Node left,right;
 	int data;
@@ -31,6 +32,8 @@ public class Tree {
 		searchNode(4);
 		searchNode(3);
 		searchNode(9);
+		insertNode(8);
+		preOrder(root);
 	}
 	
 	static Node createTree() {
@@ -99,5 +102,32 @@ public class Tree {
 			if(current.right!=null) queue.add(current.right);
 		}
 		System.out.println(value+" not present in Tree!!");
+	}
+	
+	static void insertNode(int value) {
+		if(root==null) {
+			System.out.println("Inserted Node");
+			root=new Node(value);
+			return;
+		}
+		Queue<Node> queue = new LinkedList<Node>();
+		queue.add(root);
+		while(!queue.isEmpty()) {
+			Node current = queue.remove();
+			if(current.left!=null)
+				queue.add(current.left);
+			else {
+				current.left=new Node(value);
+				System.out.println("Inserted Node");
+				return;
+			}
+			if(current.right!=null) 
+				queue.add(current.right);
+			else {
+				current.right=new Node(value);
+				System.out.println("Inserted Node");
+				return;
+			}
+		}
 	}
 }
