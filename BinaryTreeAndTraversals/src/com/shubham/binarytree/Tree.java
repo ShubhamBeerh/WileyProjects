@@ -118,14 +118,14 @@ public class Tree {
 				queue.add(current.left);
 			else {
 				current.left=new Node(value);
-				System.out.println("Inserted Node");
+				System.out.println("Inserted Node at Left");
 				return;
 			}
 			if(current.right!=null) 
 				queue.add(current.right);
 			else {
 				current.right=new Node(value);
-				System.out.println("Inserted Node");
+				System.out.println("Inserted Node at Right");
 				return;
 			}
 		}
