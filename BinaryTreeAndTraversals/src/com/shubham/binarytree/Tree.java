@@ -1,5 +1,7 @@
 package com.shubham.binarytree;
 
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Scanner;
 
 class Node{
@@ -21,6 +23,8 @@ public class Tree {
 		inOrder(root);
 		System.out.println();
 		postOrder(root);
+		System.out.println();
+		levelOrder(root);
 	}
 	
 	static Node createTree() {
@@ -58,5 +62,17 @@ public class Tree {
 		postOrder(node.left);
 		postOrder(node.right);
 		System.out.print(node.data+" ");
+	}
+	static void levelOrder(Node node) {
+		if(node==null)
+			return;
+		Queue<Node> queue = new LinkedList<Node>();
+		queue.add(node);
+		while(!queue.isEmpty()) {
+			Node current = queue.remove();
+			System.out.print(current.data+" ");
+			if(current.left!=null) queue.add(current.left);
+			if(current.right!=null) queue.add(current.right);
+		}
 	}
 }
